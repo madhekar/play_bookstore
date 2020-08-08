@@ -1,0 +1,4 @@
+# https://www.playframework.com/documentation/latest/ScalaI18N
+# Messages
+
+computers.list.title={0,choice,0#No books|1#One book|1<{0,number,integer} books} found

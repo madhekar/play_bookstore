@@ -1,0 +1,33 @@
+@(bookForm: Form[Book], users: Seq[(String, String)])(implicit requestHeader: MessagesRequestHeader)
+
+@import views.html.helper._
+
+@main {
+
+<h1>Add a book</h1>
+
+@form(action = routes.BooksController.save()) {
+
+<fieldset>
+    @CSRF.formField
+    @inputText(bookForm("title"), Symbol("_label") -> "Book name", Symbol("_help") -> "")
+    @inputText(bookForm("price"), Symbol("_label") -> "Book price", Symbol("_help") -> "")
+    @inputText(bookForm("author"), Symbol("_label") -> "Book author", Symbol("_help") -> "")
+
+    @select(
+    bookForm("user"),
+    users,
+    Symbol("_label") -> "User", Symbol("_default") -> "-- Choose a user --",
+    Symbol("_showConstraints") -> false
+    )
+</fieldset>
+
+<p>***Books are lend to User otherwise select None User***</p>
+
+<div class="actions">
+    <input type="submit" value="Create this book" class="btn primary">
+    <a href="@routes.BooksController.list()" class="btn">Cancel</a>
+</div>
+
+ }
+}
